@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
-import Button from "./Button"
-import ButtonRmv from "./ButtonRmv"
+import Plus from "./Plus"
+import Minus from "./Minus"
 
 export default function Pomodoro() {
   const [minutes, setMinutes] = useState(25)
@@ -8,14 +8,8 @@ export default function Pomodoro() {
   const [timer, setTimer] = useState(25)
   const [breakTime, setBreakTime] = useState ("5")
   const [displayMessage, setDisplayMessage] = useState(false)
+  const [running, setRunning] = useState(false)
 
-  function rmvTime() {
-    setTimer(timer - 1)
-  }
-  
-  function rmvBreak() {
-    setBreakTime(breakTime - 1)
-  }
   useEffect(() =>{
     setMinutes(timer)
   },[timer])
@@ -46,10 +40,12 @@ export default function Pomodoro() {
   const timerSeconds = seconds < 10 ? `0${seconds}` : seconds
 
   return (
+    <>
+    <h1 className="pomodoro__title">Pomodoro</h1>
     <div className="pomodoro">
 
       <div className="pomodoro__message">
-        {displayMessage && <div>Break time!</div>}
+        {!displayMessage ? <div>Work Time!</div> : <div>Break time!</div>}
       </div>
 
       <div className="pomodoro__timer">
@@ -58,18 +54,23 @@ export default function Pomodoro() {
 
       <div className="pomodoro__ctn">
         <div className="pomodoro__ctn-pmd">
-          <ButtonRmv rmv={timer} setRmv={setTimer} />
+          <Minus rmv={timer} setRmv={setTimer} />
           <div className="pomodoro__set">{timer}</div>
-          <Button add={timer} setAdd={setTimer} />
+          <Plus add={timer} setAdd={setTimer} />
         </div>
 
         <div className="pomodoro__ctn-pmd">
-          <ButtonRmv rmv={breakTime} setRmv={setBreakTime} />
+          <Minus rmv={breakTime} setRmv={setBreakTime} />
           <div className="pomodoro__set">{breakTime}</div>
-          <Button add={breakTime} setAdd={setBreakTime} />
+          <Plus add={breakTime} setAdd={setBreakTime} />
         </div>
       </div>
 
+      <div className="pomodoro__active-btn">
+        <button className="pomodoro__start">{!running ? "Start" : "Pause"}</button>
+        <button className="pomodoro__resset">Reset</button>
+      </div>
     </div>
+    </>
   )
 }
