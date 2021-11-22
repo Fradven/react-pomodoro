@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function Button({add, setAdd}) {
+export default function Plus({add, setAdd}) {
 
     function addTime() {
         setAdd(add + 1)

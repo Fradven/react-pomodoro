@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
 
-export default function ButtonRmv({rmv, setRmv}) {
+export default function Minus({rmv, setRmv}) {
     
     function rmvTime() {
         setRmv(rmv - 1)
+
+        if(rmv <= 0) {
+            setRmv(0)
+        }
       }
     return (
         <div>
