@@ -5,8 +5,8 @@ export default function Minus({rmv, setRmv}) {
     function rmvTime() {
         setRmv(rmv - 1)
 
-        if(rmv <= 0) {
-            setRmv(0)
+        if(rmv <= 1) {
+            setRmv(1)
         }
       }
     return (
