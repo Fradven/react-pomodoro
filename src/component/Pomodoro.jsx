@@ -22,6 +22,7 @@ export default function Pomodoro() {
     setDisplayMessage(false)
     setMinutes(timer)
     setSeconds(seconds)
+    setRunning(true)
   }
 
   /**
@@ -41,6 +42,11 @@ export default function Pomodoro() {
     setSeconds(seconds)
     setMinutes(minutes)
     setDisplayMessage(!displayMessage)
+
+    if (displayMessage === true){
+      resetTimer()
+      runStatus()
+    }
   }
 
   //start timer
@@ -70,10 +76,12 @@ export default function Pomodoro() {
 
   //set the time to the timer value
   useEffect(() => {
-    if (running === true){
+    if (displayMessage === false){
       setMinutes(timer)
+    } else {
+      setMinutes(breakTime)
     }
-  },[running])
+  },[timer, breakTime])
 
   //run and pause the timer
   useEffect(() => {
