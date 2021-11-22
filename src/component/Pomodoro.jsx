@@ -1,30 +1,73 @@
 import React, { useState, useEffect } from "react"
 import Plus from "./Plus"
 import Minus from "./Minus"
-import Timer from "./Timer"
+
+let interval;
 
 export default function Pomodoro() {
   const [minutes, setMinutes] = useState(25)
   const [seconds, setSeconds] = useState(0)
   const [timer, setTimer] = useState(25)
   const [breakTime, setBreakTime] = useState ("5")
-  
+  const [displayMessage, setDisplayMessage] = useState(false)
   const [running, setRunning] = useState(false)
 
   function resetTimer() {
+  clearInterval(interval)
+  let seconds = 0
+
+    setDisplayMessage(false)
     setMinutes(timer)
+    setSeconds(seconds)
+  }
+
+  function timeBreak() {
+    let minutes = breakTime - 1
+    let seconds = 59
+    
+    setSeconds(seconds)
+    setMinutes(minutes)
+    setDisplayMessage(!displayMessage)
   }
 
   useEffect(() => {
     setMinutes(timer)
   },[timer])
 
+  useEffect(() => {
+    interval = setInterval(() => {
+      
+      clearInterval(interval)
+  
+      if (seconds === 0) {
+        if (minutes !== 0) {
+          setSeconds(59)
+          setMinutes(minutes - 1)
+        } else {
+          timeBreak()
+        }
+      } else {
+
+        setSeconds(seconds - 1)
+      }
+    }, 1000)
+  }, [seconds])
+
+  const timerMinutes = minutes < 10 ? `0${minutes}` : minutes
+  const timerSeconds = seconds < 10 ? `0${seconds}` : seconds
+
   return (
     <>
     <h1 className="pomodoro__title">Pomodoro</h1>
     <div className="pomodoro">
+    
+    <div className="pomodoro__message">
+      {!displayMessage ? <div>Work Time!</div> : <div>Break time!</div>}
+    </div>
 
-      <Timer minutes={minutes} setMinutes={setMinutes} seconds={seconds} setSeconds={setSeconds} />
+    <div className="pomodoro__timer">
+      {timerMinutes}:{timerSeconds}
+    </div>
 
       <div className="pomodoro__ctn">
         <div className="pomodoro__ctn-pmd">
