@@ -8,10 +8,13 @@ export default function Pomodoro() {
   const [minutes, setMinutes] = useState(25)
   const [seconds, setSeconds] = useState(0)
   const [timer, setTimer] = useState(25)
-  const [breakTime, setBreakTime] = useState ("5")
+  const [breakTime, setBreakTime] = useState (5)
   const [displayMessage, setDisplayMessage] = useState(false)
   const [running, setRunning] = useState(false)
 
+  /**
+   * Reset the timer to the set up time
+   */
   function resetTimer() {
   clearInterval(interval)
   let seconds = 0
@@ -21,6 +24,16 @@ export default function Pomodoro() {
     setSeconds(seconds)
   }
 
+  /**
+   * change the boolean to the opposite
+   */
+  function runStatus() {
+    setRunning(!running)
+  }
+
+  /**
+   * takes in the breaktime and apply
+   */
   function timeBreak() {
     let minutes = breakTime - 1
     let seconds = 59
@@ -30,11 +43,8 @@ export default function Pomodoro() {
     setDisplayMessage(!displayMessage)
   }
 
-  useEffect(() => {
-    setMinutes(timer)
-  },[timer])
-
-  useEffect(() => {
+  //start timer
+  const startTimer = () => {
     interval = setInterval(() => {
       
       clearInterval(interval)
@@ -51,7 +61,26 @@ export default function Pomodoro() {
         setSeconds(seconds - 1)
       }
     }, 1000)
-  }, [seconds])
+  }
+
+  //stop timer
+  const stopTimer = () => {
+    clearInterval(interval);
+  }
+
+  //set the time to the timer value
+  useEffect(() => {
+    if (running === true){
+      setMinutes(timer)
+    }
+  },[running])
+
+  //run and pause the timer
+  useEffect(() => {
+    if (running === true) startTimer();
+        if (!running) stopTimer();
+
+  }, [running, seconds])
 
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes
   const timerSeconds = seconds < 10 ? `0${seconds}` : seconds
@@ -84,7 +113,7 @@ export default function Pomodoro() {
       </div>
 
       <div className="pomodoro__active-btn">
-        <button className="pomodoro__start">{!running ? "Start" : "Pause"}</button>
+        <button className="pomodoro__start" onClick={runStatus} >{!running ? "Start" : "Pause"}</button>
         <button className="pomodoro__resset" onClick={resetTimer}>Reset</button>
       </div>
     </div>
