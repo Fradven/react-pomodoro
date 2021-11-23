@@ -1,0 +1,79 @@
+.pomodoro {
+
+  &__active-btn{
+    padding-top: 32px;
+  }
+
+  &__start {
+    background: #ffce45;
+    border: 1px solid #ffce45;
+    border-radius: 2px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #1e212d;
+    cursor: pointer;
+    display: inline-block;
+    font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 16px;
+    min-height: 40px;
+    outline: 0;
+    padding: 4px 32px;
+    margin-right: 18px;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+  }
+  
+  &__start:hover,
+  &__start:active {
+    background-color: initial;
+    background-position: 0 0;
+    color: #ffce45;
+  }
+  
+  &__start:active {
+    opacity: .5;
+  }
+
+&__resset {
+  background: #ffce45;
+  border: 1px solid #ffce45;
+  border-radius: 2px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #1e212d;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 4px 32px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+&__resset:hover,
+&__resset:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #ffce45;
+}
+
+&__resset:active {
+  opacity: .5;
+}
+}

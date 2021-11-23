@@ -21,6 +21,7 @@
     "@babel/core": "^7.16.0",
     "@babel/eslint-parser": "^7.16.3",
     "@becode/eslint-config": "^0.12.1",
+    "@parcel/transformer-sass": "^2.0.1",
     "eslint": "^8.2.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.27.0",

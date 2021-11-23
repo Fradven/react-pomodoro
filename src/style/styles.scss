@@ -1,0 +1,44 @@
+@import "reset";
+@import "var";
+@import "plus-minus";
+@import "start-reset";
+
+body {
+    background-color: #1e212d;
+    color: #eabf9f;
+    height: 100vh;
+
+    .pomodoro__title {
+        text-align: center;
+        font-size: 62px;
+        letter-spacing: 4px;
+        padding-top: 70px;
+    }
+
+    .pomodoro {
+        width: 320px;
+        margin: 0 auto;
+        text-align: center;
+        padding-top: 38px;
+
+        &__message {
+            font-size: 25px;
+        }
+
+        &__timer {
+            font-size: 4em;
+            padding-top: 8px;
+        }
+
+        &__ctn-pmd {
+            display: flex;
+            padding-top: 25px;
+        }
+
+        &__set {
+            padding: 0 10px;
+            padding-top: 6px;
+        }
+
+    }
+}
