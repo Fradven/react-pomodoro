@@ -23,12 +23,9 @@ export default function Pomodoro() {
           setSeconds(59)
           setMinutes(minutes - 1)
         } else {
-          let minutes = breakTime - 1
-    let seconds = 59
-    
-    setSeconds(seconds)
-    setMinutes(minutes)
-    setDisplayMessage(!displayMessage)
+          setSeconds(59)
+          setMinutes(breakTime - 1)
+          setDisplayMessage(!displayMessage)
 
     if (displayMessage === true){
       resetTimer()
@@ -92,6 +89,7 @@ export default function Pomodoro() {
     <div className="pomodoro">
     
     <div className="pomodoro__message">
+
       {!displayMessage ? <div>Work Time!</div> : <div>Break time!</div>}
     </div>
 
@@ -102,13 +100,13 @@ export default function Pomodoro() {
       <div className="pomodoro__ctn">
         <div className="pomodoro__ctn-pmd">
           <Minus rmv={timer} setRmv={setTimer} />
-          <div className="pomodoro__set">{timer}</div>
+          <div className="pomodoro__set">Wrok : {timer}</div>
           <Plus add={timer} setAdd={setTimer} />
         </div>
 
         <div className="pomodoro__ctn-pmd">
           <Minus rmv={breakTime} setRmv={setBreakTime} />
-          <div className="pomodoro__set">{breakTime}</div>
+          <div className="pomodoro__set">Break : {breakTime}</div>
           <Plus add={breakTime} setAdd={setBreakTime} />
         </div>
       </div>

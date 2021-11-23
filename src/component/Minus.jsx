@@ -15,3 +15,4 @@ export default function Minus({rmv, setRmv}) {
         </div>
     )
 }
+
