@@ -11,44 +11,7 @@ export default function Pomodoro() {
   const [breakTime, setBreakTime] = useState (5)
   const [displayMessage, setDisplayMessage] = useState(false)
   const [running, setRunning] = useState(false)
-
-  /**
-   * Reset the timer to the set up time
-   */
-  function resetTimer() {
-  clearInterval(interval)
-  let seconds = 0
-
-    setDisplayMessage(false)
-    setMinutes(timer)
-    setSeconds(seconds)
-    setRunning(true)
-  }
-
-  /**
-   * change the boolean to the opposite
-   */
-  function runStatus() {
-    setRunning(!running)
-  }
-
-  /**
-   * takes in the breaktime and apply
-   */
-  function timeBreak() {
-    let minutes = breakTime - 1
-    let seconds = 59
-    
-    setSeconds(seconds)
-    setMinutes(minutes)
-    setDisplayMessage(!displayMessage)
-
-    if (displayMessage === true){
-      resetTimer()
-      runStatus()
-    }
-  }
-
+  
   //start timer
   const startTimer = () => {
     interval = setInterval(() => {
@@ -60,20 +23,26 @@ export default function Pomodoro() {
           setSeconds(59)
           setMinutes(minutes - 1)
         } else {
-          timeBreak()
+          setSeconds(59)
+          setMinutes(breakTime - 1)
+          setDisplayMessage(!displayMessage)
+
+    if (displayMessage === true){
+      resetTimer()
+    }
         }
       } else {
-
+  
         setSeconds(seconds - 1)
       }
     }, 1000)
   }
-
+  
   //stop timer
   const stopTimer = () => {
     clearInterval(interval);
   }
-
+  
   //set the time to the timer value
   useEffect(() => {
     if (displayMessage === false){
@@ -82,13 +51,34 @@ export default function Pomodoro() {
       setMinutes(breakTime)
     }
   },[timer, breakTime])
-
+  
   //run and pause the timer
   useEffect(() => {
     if (running === true) startTimer();
         if (!running) stopTimer();
-
+  
   }, [running, seconds])
+
+  /**
+   * Reset the timer to the set up time
+   */
+  function resetTimer() {
+    clearInterval(interval)
+  let seconds = 0
+
+    setDisplayMessage(false)
+    setMinutes(timer)
+    setSeconds(seconds)
+    setRunning(false)
+  }
+
+  /**
+   * change the boolean to the opposite
+   */
+  function runStatus() {
+    setRunning(!running)
+  }
+
 
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes
   const timerSeconds = seconds < 10 ? `0${seconds}` : seconds
@@ -99,6 +89,7 @@ export default function Pomodoro() {
     <div className="pomodoro">
     
     <div className="pomodoro__message">
+
       {!displayMessage ? <div>Work Time!</div> : <div>Break time!</div>}
     </div>
 
@@ -109,13 +100,13 @@ export default function Pomodoro() {
       <div className="pomodoro__ctn">
         <div className="pomodoro__ctn-pmd">
           <Minus rmv={timer} setRmv={setTimer} />
-          <div className="pomodoro__set">{timer}</div>
+          <div className="pomodoro__set">Wrok : {timer}</div>
           <Plus add={timer} setAdd={setTimer} />
         </div>
 
         <div className="pomodoro__ctn-pmd">
           <Minus rmv={breakTime} setRmv={setBreakTime} />
-          <div className="pomodoro__set">{breakTime}</div>
+          <div className="pomodoro__set">Break : {breakTime}</div>
           <Plus add={breakTime} setAdd={setBreakTime} />
         </div>
       </div>
