@@ -2,7 +2,7 @@
   "name": "react-pomodoro",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+
   "scripts": {
     "dev": "parcel src/index.html --public-url /",
     "build": "parcel build src/index.html --public-url ./"
